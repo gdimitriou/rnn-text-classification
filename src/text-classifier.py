@@ -38,9 +38,10 @@ porter = PorterStemmer()
 stop_words = set(stopwords.words('english'))
 stop_words.update(['.', ',', '"', "'", ':', ';', '(', ')', '[', ']', '{', '}'])
 
-# the maximum number of words considered is 100000
+# The maximum number of words considered is 100000
 MAX_NB_WORDS = 100000
-# the size of the sentences will be 250
+
+# The size of the sentences will be 250
 max_seq_len = 250
 
 raw_docs_train = train['comment_text'].tolist()
@@ -72,7 +73,7 @@ word_seq_test = tokenizer.texts_to_sequences(processed_docs_test)
 word_index = tokenizer.word_index
 print("dictionary size: ", len(word_index))
 
-# pad sequences
+# Pad sequences
 word_seq_train = sequence.pad_sequences(word_seq_train, maxlen=max_seq_len)
 word_seq_test = sequence.pad_sequences(word_seq_test, maxlen=max_seq_len)
 
@@ -80,7 +81,7 @@ print("Done !!")
 
 embed_dim = 300
 
-# load embeddings
+# Load embeddings
 print('loading first word embeddings...')
 embeddings_index = {}
 f = codecs.open('../resources/glove.840B.300d.txt', encoding='utf-8')
@@ -93,7 +94,7 @@ for line in tqdm(f):
 f.close()
 print('found %s word vectors' % len(embeddings_index))
 
-# embedding matrix
+# Embedding matrix
 print('preparing embedding matrix...')
 words_not_found = []
 nb_words = min(MAX_NB_WORDS, len(word_index))
@@ -128,7 +129,6 @@ for word, i in word_index.items():
 del embeddings_index
 
 # Creating model
-
 inp = Input(shape=(max_seq_len,))
 emb_glove = Embedding(nb_words, 300,
                       weights=[embedding_matrix_glove], input_length=max_seq_len, trainable=False)(inp)
