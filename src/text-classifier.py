@@ -85,6 +85,8 @@ print("Done !!")
 embed_dim = 300
 
 # Load embeddings
+# Used the concatenation of two pre - trained embeddings: fastText crawl-300d-2M.vec and glove.840B.300d.txt.
+# They must be downloaded!
 print('loading first word embeddings...')
 embeddings_index = {}
 f = codecs.open('../resources/glove.840B.300d.txt', encoding='utf-8')
