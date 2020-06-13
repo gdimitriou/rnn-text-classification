@@ -139,24 +139,33 @@ inp = Input(shape=(max_seq_len,))
 emb_glove = Embedding(nb_words, 300, weights=[embedding_matrix_glove], input_length=max_seq_len, trainable=False)(inp)
 emb_crawl = Embedding(nb_words, 300, weights=[embedding_matrix_crawl], input_length=max_seq_len, trainable=False)(inp)
 conc1 = concatenate([emb_glove, emb_crawl])
+
+# Bidirectional LSTM preserve information from both past and future
 x = Bidirectional(LSTM(400, return_sequences=True))(conc1)
 x = Bidirectional(GRU(400, return_sequences=True))(x)
+
+# Two stages of pooling
 avg_pool = GlobalAveragePooling1D()(x)
 max_pool = GlobalMaxPooling1D()(x)
 out = concatenate([avg_pool, max_pool])
+
 out = Dense(200, activation="relu")(out)
 out = Dense(y_train.shape[1], activation="sigmoid")(out)
 
+# Compile the Model
 model = Model(inputs=inp, outputs=out)
 model.compile(loss='binary_crossentropy', optimizer=keras.optimizers.Adam(lr=0.001), metrics=['accuracy'])
-
 model.summary()
 
+# Train the Model
 model.fit(word_seq_train, y_train, epochs=6, batch_size=80, shuffle=True, validation_split=0.1, verbose=2)
 
+# Find probability for each id listed in file
 y_test = model.predict(word_seq_test)
 
 sample_submission = pd.read_csv("../resources/sample_submission.csv")
 
 sample_submission[list_classes] = y_test
+
+# Write predictions to new csv file
 sample_submission.to_csv("../resources/results.csv", index=False)
