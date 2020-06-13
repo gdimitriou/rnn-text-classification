@@ -74,6 +74,9 @@ word_index = tokenizer.word_index
 print("dictionary size: ", len(word_index))
 
 # Pad sequences
+# is used to ensure that all sequences in a list have the same length.
+# By default this is done by padding 0 in the beginning of each sequence until each
+# sequence has the same length as the longest sequence.
 word_seq_train = sequence.pad_sequences(word_seq_train, maxlen=max_seq_len)
 word_seq_test = sequence.pad_sequences(word_seq_test, maxlen=max_seq_len)
 
