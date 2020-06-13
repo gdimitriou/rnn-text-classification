@@ -135,26 +135,19 @@ del embeddings_index
 
 # Creating model
 inp = Input(shape=(max_seq_len,))
-emb_glove = Embedding(nb_words, 300,
-                      weights=[embedding_matrix_glove], input_length=max_seq_len, trainable=False)(inp)
-
-emb_crawl = Embedding(nb_words, 300,
-                      weights=[embedding_matrix_crawl], input_length=max_seq_len, trainable=False)(inp)
-
+emb_glove = Embedding(nb_words, 300, weights=[embedding_matrix_glove], input_length=max_seq_len, trainable=False)(inp)
+emb_crawl = Embedding(nb_words, 300, weights=[embedding_matrix_crawl], input_length=max_seq_len, trainable=False)(inp)
 conc1 = concatenate([emb_glove, emb_crawl])
 x = Bidirectional(LSTM(400, return_sequences=True))(conc1)
 x = Bidirectional(GRU(400, return_sequences=True))(x)
 avg_pool = GlobalAveragePooling1D()(x)
 max_pool = GlobalMaxPooling1D()(x)
 out = concatenate([avg_pool, max_pool])
-
 out = Dense(200, activation="relu")(out)
 out = Dense(y_train.shape[1], activation="sigmoid")(out)
 
 model = Model(inputs=inp, outputs=out)
-
-model.compile(loss='binary_crossentropy', optimizer=keras.optimizers.Adam(lr=0.001),
-              metrics=['accuracy'])
+model.compile(loss='binary_crossentropy', optimizer=keras.optimizers.Adam(lr=0.001), metrics=['accuracy'])
 
 model.summary()
 
