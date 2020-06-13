@@ -3,5 +3,4 @@
 =1.13
 requirements.txt
 venv/
-./resources/test.csv
-./resources/train.csv
+./resources
