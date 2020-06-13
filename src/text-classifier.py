@@ -2,6 +2,7 @@ import keras
 import numpy as np
 import pandas as pd
 import nltk
+
 nltk.download('stopwords')
 # import tqdm as tqdm
 # from keras_tqdm import TQDMNotebookCallback
