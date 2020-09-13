@@ -23,6 +23,7 @@ Instructions to run the program:
     5. Run the text-classifier.py.
 
 Expecting output:
+
     The model's accuracy scores over 98%.
     The model predicts a probability for each variable imported in the dataset.
     The output should look like sample_submission.txt
