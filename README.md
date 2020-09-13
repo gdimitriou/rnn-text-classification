@@ -13,14 +13,16 @@ This is a Recurrent Neural Network that performs text toxicity classification
 
 #Instructions to run the program:
 
-    Clone the project from: https://github.com/gdimitriou/rnn-text-classification.git
-    Import it to your favorite IDE
-    Download the dependencies
-    Download the embeddings from: 
+    1. Clone the project from: https://github.com/gdimitriou/rnn-text-classification.git.
+    2. Import it to your favorite IDE.
+    3. Download the dependencies.
+    4. Download the embeddings from: 
         1. https://nlp.stanford.edu/projects/glove/
-        2. 
-    Run the text-classifier.py
+        2. https://fasttext.cc/docs/en/english-vectors.html
+    5. Import the embeddings manually under resources directory.    
+    5. Run the text-classifier.py.
 
 #Expecting output:
-    The model predicts a probability for each 
+    The model's accuracy scores over 98%.
+    The model predicts a probability for each variable imported in the dataset.
     The output should look like sample_submission.txt
