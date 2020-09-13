@@ -11,7 +11,7 @@ This is a Recurrent Neural Network that performs text toxicity classification
     numpy (1.18.2)
     os
 
-#Instructions to run the program:
+Instructions to run the program:
 
     1. Clone the project from: https://github.com/gdimitriou/rnn-text-classification.git.
     2. Import it to your favorite IDE.
@@ -22,7 +22,7 @@ This is a Recurrent Neural Network that performs text toxicity classification
     5. Import the embeddings manually under resources directory.    
     5. Run the text-classifier.py.
 
-#Expecting output:
+Expecting output:
     The model's accuracy scores over 98%.
     The model predicts a probability for each variable imported in the dataset.
     The output should look like sample_submission.txt
